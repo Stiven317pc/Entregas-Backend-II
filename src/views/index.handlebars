@@ -1,0 +1,19 @@
+<h1>Listado de productos</h1>
+
+{{#each products}}
+  <div>
+    <h3>{{this.title}}</h3>
+    <p>Precio: ${{this.price}}</p>
+    <p>Categoría: {{this.category}}</p>
+    <button onclick="addToCart('{{this._id}}')">Agregar al carrito</button>
+    <hr />
+  </div>
+{{/each}}
+
+{{#if prevLink.exist}}
+  <a href="{{prevLink.link}}">← Página anterior</a>
+{{/if}}
+
+{{#if nextLink.exist}}
+  <a href="{{nextLink.link}}">Siguiente página →</a>
+{{/if}}

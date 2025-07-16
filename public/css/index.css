@@ -1,0 +1,43 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.box {
+  max-width: 900px;
+  margin: auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #333;
+}
+
+.welcome h1 {
+  margin-bottom: 10px;
+}
+
+.welcome p {
+  margin: 10px 0;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.9em;
+  color: #666;
+}

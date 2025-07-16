@@ -1,0 +1,14 @@
+<h1>Productos en tiempo real</h1>
+
+<form onsubmit="createProduct(event)">
+  <p><input type="text" id="title" placeholder="Título" required /></p>
+  <p><input type="text" id="description" placeholder="Descripción" required /></p>
+  <p><input type="text" id="code" placeholder="Código" required /></p>
+  <p><input type="number" id="price" placeholder="Precio" required /></p>
+  <p><input type="number" id="stock" placeholder="Stock" required /></p>
+  <p><input type="text" id="category" placeholder="Categoría" required /></p>
+  <p><button type="submit">Crear producto</button></p>
+</form>
+
+<h2>Productos existentes</h2>
+<div id="realTimeProductList"></div>
