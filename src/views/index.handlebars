@@ -1,0 +1,51 @@
+<h1 style="text-align: center;">🛍️ Productos disponibles</h1>
+
+{{#if message}}
+  <div style="text-align: center; padding: 20px; background-color: #fee2e2; color: #b91c1c; border-radius: 8px; margin-bottom: 20px;">
+    {{message}}
+  </div>
+{{/if}}
+
+{{#if user}}
+  {{#each products}}
+    <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+      <h3 style="margin: 0;">{{this.title}}</h3>
+      <p>💰 Precio: ${{this.price}}</p>
+      <p>📦 Categoría: {{this.category}}</p>
+      <button onclick="addToCart('{{this._id}}')" style="padding: 8px 16px; background-color: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        Agregar al carrito
+      </button>
+    </div>
+  {{/each}}
+{{/if}}
+
+<script>
+  const userCartId = '{{userCartId}}';
+
+  async function addToCart(productId) {
+    if (!userCartId) {
+      alert('⚠️ No tienes un carrito asignado.');
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/carts/${userCartId}/product/${productId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      });
+
+      if (res.ok) {
+        alert('✅ Producto agregado al carrito');
+      } else {
+        const error = await res.json();
+        alert(`❌ Error: ${error.message || 'No se pudo agregar el producto'}`);
+      }
+    } catch (err) {
+      console.error('Error al agregar al carrito:', err);
+      alert('❌ Error inesperado');
+    }
+  }
+</script>

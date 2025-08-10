@@ -1,0 +1,20 @@
+<td>
+  <form action="/api/users/premium/{{this.id}}" method="POST" style="display: inline;">
+    <button type="submit">Cambiar a Premium</button>
+  </form>
+  <button onclick="deleteUser('{{this.id}}')">Eliminar</button>
+</td>
+
+<script>
+  async function deleteUser(id) {
+    if (!confirm('¿Eliminar usuario?')) return;
+
+    const res = await fetch(`/api/users/${id}`, { method: 'DELETE' });
+    if (res.ok) {
+      alert('Usuario eliminado');
+      location.reload();
+    } else {
+      alert('Error al eliminar');
+    }
+  }
+</script>

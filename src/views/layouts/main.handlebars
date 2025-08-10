@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mi E-commerce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      header, nav, footer {
+        padding: 1rem;
+        background-color: #f5f5f5;
+        text-align: center;
+      }
+      nav a {
+        margin: 0 0.5rem;
+        text-decoration: none;
+        color: #333;
+      }
+      nav form {
+        display: inline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      Proyecto E-Commerce
+    </header>
+
+<nav>
+  <a href="/">Inicio</a>
+  <a href="/products">Productos</a>
+
+  <a href="#" onclick="handleCartClick()">🛒 Mi carrito</a>
+
+  {{#if user}}
+    <span>👤 {{user.first_name}}</span>
+    <a href="/sessions/current">Mi perfil</a>
+
+    {{#ifEquals user.role "admin"}}
+      <a href="/admin">Admin</a>
+    {{/ifEquals}}
+
+    <form action="/sessions/logout" method="POST">
+      <button type="submit">Cerrar sesión</button>
+    </form>
+  {{else}}
+    <a href="/sessions/register">Registrarse</a>
+    <a href="/sessions/login">Login</a>
+  {{/if}}
+</nav>
+
+<script>
+  function handleCartClick() {
+    const isLoggedIn = {{#if user}}true{{else}}false{{/if}};
+    if (!isLoggedIn) {
+      alert('⚠️ Iniciá sesión para ver tu carrito');
+    } else {
+      window.location.href = '/cart/{{user.cart}}';
+    }
+  }
+</script>
+
+
+    <main>
+      {{{body}}}
+    </main>
+
+    <footer>
+      &copy; Todos los derechos reservados por Stiven
+    </footer>
+  </body>
+</html>

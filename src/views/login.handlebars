@@ -1,0 +1,42 @@
+<h2 style="text-align: center;">🔐 Iniciar sesión</h2>
+
+<form id="loginForm" style="max-width: 400px; margin: auto;">
+  <input type="email" name="email" placeholder="Correo" required style="width: 100%; padding: 10px; margin-bottom: 10px;" />
+  <input type="password" name="password" placeholder="Contraseña" required style="width: 100%; padding: 10px; margin-bottom: 10px;" />
+  <button type="submit" style="width: 100%; padding: 10px; background-color: #2563eb; color: white; border: none; border-radius: 4px;">
+    Ingresar
+  </button>
+  <div style="text-align: center; margin-top: 10px;">
+    <a href="/recover">¿Olvidaste tu contraseña?</a>
+  </div>
+</form>
+
+<script>
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const email = formData.get('email');
+    const password = formData.get('password');
+
+    try {
+      const res = await fetch('/api/sessions/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+        credentials: 'include' 
+      });
+
+      if (res.ok) {
+        alert('✅ Login exitoso');
+        window.location.href = '/products'; 
+      } else {
+        const error = await res.json();
+        alert(`❌ Error: ${error.message || 'Credenciales incorrectas'}`);
+      }
+    } catch (err) {
+      console.error('Error en login:', err);
+      alert('❌ Error inesperado al iniciar sesión');
+    }
+  });
+</script>
